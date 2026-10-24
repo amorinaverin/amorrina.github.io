@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Carta de a Morriña Coffee & Jazz Company, Verín (Ourense).">
+<title>Carta A Morriña</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&family=Barlow+Condensed:wght@400;500;600&family=Yellowtail&display=swap">
+<style>
+/* Layout: una columna para móvil. Cada sección de la carta es una cara de un single de 45 RPM:
+   el disco asoma de su funda y la funda (con los colores de la etiqueta) lleva el tracklist. */
+:root{
+  --bg:#1a1512;
+  --vinyl:#0b0a0a;
+  --label:#df9d64;
+  --label-deep:#a9693a;
+  --cream:#f3e8d6;
+  --paper:#fffaf2;
+  --ink:#1f140c;
+  --ink-soft:#5a3b21;
+  --blue:#393b9c;
+  --plum:#4b2034;
+  --muted:#ab9886;
+  --hair:rgba(243,232,214,.12);
+  --rule:rgba(31,20,12,.18);
+  --f-display:"Antonio","Oswald","Arial Narrow",sans-serif;
+  --f-body:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-script:"Yellowtail","Brush Script MT",cursive;
+  --header-h:60px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--f-body);font-size:16px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--label);outline-offset:3px}
+
+/* ---------- Cabecera ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.top-in{max-width:560px;margin:0 auto;height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;flex-direction:column;text-decoration:none;min-width:0}
+.brand .logo{font:400 27px/1 var(--f-script);color:var(--paper);text-shadow:2px 2px 0 var(--label-deep);white-space:nowrap}
+.brand small{font:500 9px/1 var(--f-display);letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:4px;white-space:nowrap}
+.sides{display:flex;gap:8px}
+
+/* Mini disco: botones de cara */
+.mini{--s:40px;--lab:var(--label);flex:none;width:var(--s);height:var(--s);border-radius:50%;display:inline-grid;place-items:center;font:700 calc(var(--s)*.34)/1 var(--f-display);color:var(--ink);text-decoration:none;
+  background:radial-gradient(circle closest-side,var(--lab) 0 54%,#000 55% 57%,transparent 58%),repeating-radial-gradient(circle,#1b1816 0 1px,var(--vinyl) 1px 2.6px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.10);transition:box-shadow .2s}
+.mini[aria-current="true"]{--lab:var(--cream);box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 0 0 2px var(--bg),0 0 0 3.5px var(--label)}
+
+/* ---------- Página ---------- */
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 36px;display:flex;flex-direction:column;gap:64px}
+section{scroll-margin-top:calc(var(--header-h) + env(safe-area-inset-top,0px) + 10px)}
+
+/* ---------- Disco ---------- */
+.record{position:relative;width:var(--d);max-width:100%;aspect-ratio:1;flex:none;border:0;padding:0;margin:0;border-radius:50%;background:none;cursor:pointer;display:block;filter:drop-shadow(0 20px 26px rgba(0,0,0,.55));-webkit-tap-highlight-color:transparent;transition:transform .95s cubic-bezier(.2,.75,.25,1)}
+.record .spin{position:absolute;inset:0;display:block}
+.record svg{display:block;width:100%;height:100%}
+.record::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 18deg,transparent 0deg,rgba(255,255,255,.11) 26deg,transparent 52deg,transparent 182deg,rgba(255,255,255,.08) 208deg,transparent 236deg);
+  -webkit-mask:radial-gradient(circle closest-side,transparent 0 56.5%,#000 57.5%);mask:radial-gradient(circle closest-side,transparent 0 56.5%,#000 57.5%)}
+.record.tucked{transform:translateY(30%)}
+.spin.go{animation:spinIn 1.6s cubic-bezier(.12,.66,.22,1)}
+@keyframes spinIn{from{transform:rotate(-620deg)}to{transform:none}}
+
+/* Clases del SVG del disco */
+.vin{fill:var(--vinyl)}
+.rim{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1}
+.gv{fill:none;stroke:rgba(255,255,255,.045);stroke-width:.55}
+.gap{fill:none;stroke:#000;stroke-width:1.8}
+.gap-hi{fill:none;stroke:rgba(255,255,255,.10);stroke-width:.6}
+.lb-o{fill:var(--label)}
+.lb-c{fill:var(--cream)}
+.lb-line{stroke:var(--ink);stroke-width:1.1}
+.lb-edge{fill:none;stroke:rgba(0,0,0,.4);stroke-width:1.2}
+.hole{fill:var(--bg)}
+.lb-logo,.lb-logo-sh{font-family:var(--f-script);font-size:44px;stroke:var(--ink);stroke-width:4.5;stroke-linejoin:round}
+.lb-logo{fill:var(--paper);paint-order:stroke fill}
+.lb-logo-sh{fill:var(--ink)}
+.lb-big{font:700 22px var(--f-display);fill:var(--ink)}
+.lb-tiny{font:500 5.8px var(--f-display);letter-spacing:1.4px;fill:var(--ink)}
+.lb-title{font:200 26px var(--f-display);letter-spacing:9px;fill:var(--ink)}
+.lb-title.s{font-weight:300;font-size:21px;letter-spacing:5px}
+.lb-small{font:600 7.2px var(--f-body);letter-spacing:.6px;fill:var(--ink)}
+.lb-arc{font:500 9.5px var(--f-display);letter-spacing:3px;fill:var(--ink)}
+
+/* ---------- Cara A: portada ---------- */
+.cover{--d:min(86vw,360px);position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;padding-top:6px}
+.cover::before{content:"";position:absolute;inset:0 0 auto;height:var(--d);background:radial-gradient(closest-side,rgba(223,157,100,.14),transparent);pointer-events:none;z-index:-1}
+.hint{margin:-4px 0 6px;font:500 14px/1.3 var(--f-body);letter-spacing:.03em;color:var(--muted)}
+.index{width:100%;background:var(--cream);color:var(--ink);border-radius:22px;padding:20px 18px 6px;box-shadow:0 24px 40px -26px rgba(0,0,0,.9)}
+.index h2{margin:0 0 6px;font:500 12px/1 var(--f-display);letter-spacing:.26em;text-transform:uppercase;color:var(--label-deep)}
+.index .lead{margin:0 0 12px;font:500 17px/1.35 var(--f-body);color:var(--ink-soft);max-width:44ch}
+.index ol{list-style:none;margin:0;padding:0}
+.index a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding-block:13px;border-top:1px solid var(--rule);text-decoration:none}
+.index .mini{--s:46px}
+.index .eyb{display:block;font:500 11px/1 var(--f-display);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+.index .ttl{display:block;font:600 23px/1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.index .xtra{display:block;font:500 15px/1.2 var(--f-body);color:var(--ink-soft);margin-top:3px}
+.index .cnt{display:flex;align-items:center;gap:6px;font:500 15px/1 var(--f-body);color:var(--ink-soft);white-space:nowrap}
+.index .cnt svg{width:14px;height:14px}
+
+/* ---------- Caras B, C, D: disco + funda ---------- */
+.side{--d:min(66vw,260px);display:flex;flex-direction:column;align-items:center}
+.side .record{z-index:1}
+.sleeve{position:relative;z-index:2;width:100%;margin-top:calc(var(--d) * -.2);display:grid;grid-template-columns:62px minmax(0,1fr);border-radius:22px;overflow:hidden;background:var(--label);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 26px 44px -26px rgba(0,0,0,.95)}
+.strip{background:var(--cream);display:flex;flex-direction:column;align-items:center;gap:14px;padding-block:22px 18px;border-right:1px solid var(--rule)}
+.side-tag{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink)}
+.side-tag b{font:700 34px/.9 var(--f-display)}
+.side-tag span{font:500 9px/1 var(--f-display);letter-spacing:.24em;text-transform:uppercase;padding-left:.24em}
+.strip hr{width:28px;border:0;border-top:1px solid rgba(31,20,12,.35);margin:0}
+.vtitle{margin:auto 0;writing-mode:vertical-rl;transform:rotate(180deg);font:300 44px/1 var(--f-display);letter-spacing:.3em;text-transform:uppercase;color:var(--label-deep)}
+.rpm{font:600 18px/1 var(--f-display);color:var(--ink);text-align:center}
+.rpm small{display:block;font:500 8px/1.2 var(--f-display);letter-spacing:.2em;margin-top:3px;padding-left:.2em}
+.body{min-width:0;display:flex;flex-direction:column}
+.tracks{list-style:none;margin:0;padding:6px 16px 4px 12px}
+.track{display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:6px;padding-block:15px;border-bottom:1px solid var(--rule)}
+.track:last-child{border-bottom:0}
+.no{font:500 11px/1 var(--f-display);letter-spacing:.06em;color:var(--ink-soft);padding-top:8px;font-variant-numeric:tabular-nums}
+.t-head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:10px;row-gap:5px}
+.t-name{flex:1 1 120px;margin:0;font:600 25px/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.005em;color:var(--ink);text-wrap:balance}
+.t-name .pre{font-weight:300;font-size:.56em;letter-spacing:.14em;margin-right:.4em}
+.mark{display:inline-block;width:18px;height:18px;vertical-align:-1px;margin-left:6px}
+.price{margin-left:auto;font:600 21px/1 var(--f-display);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pair{display:inline-flex;flex-wrap:wrap;justify-content:flex-end;align-items:baseline;gap:4px 10px;min-width:0;max-width:100%}
+.pair i{align-self:stretch;width:1px;background:currentColor;opacity:.35}
+.pair small{font:500 9.5px/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;margin-right:6px;opacity:.75}
+.desc{margin:6px 0 0;font:500 16.5px/1.3 var(--f-body);color:var(--ink-soft);max-width:40ch}
+.compact .track{padding-block:12px}
+.compact .t-name{font-size:21px}
+.compact .price{font-size:19px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:auto;padding:13px 16px 16px 12px;border-top:1px solid var(--rule);font:500 11px/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend .mark{margin:0}
+
+/* Bandas a todo el ancho (vinos, postre) */
+.band{grid-column:1/-1;padding-block:20px 6px;color:var(--cream)}
+.band.azul{background:var(--blue)}
+.band.morado{background:var(--plum)}
+.band-title{margin:0;padding-left:44px;padding-right:16px;font:200 36px/1 var(--f-display);letter-spacing:.3em;text-transform:uppercase}
+.band .tracks{padding-top:4px}
+.band .track{border-color:rgba(243,232,214,.16)}
+.band .t-name,.band .price{color:var(--cream)}
+.band .no,.band .desc{color:rgba(243,232,214,.72)}
+
+.flip{align-self:flex-end;display:inline-flex;align-items:center;gap:10px;margin-top:16px;font:500 12px/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding-block:4px}
+.flip .mini{--s:30px}
+
+/* ---------- Pie ---------- */
+.foot{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 44px}
+.foot-in{border-top:1px solid var(--hair);padding-top:22px;display:flex;flex-direction:column;gap:4px;font:500 15px/1.45 var(--f-body);color:var(--muted)}
+.foot .logo{font:400 30px/1 var(--f-script);color:var(--paper);text-shadow:2px 2px 0 var(--label-deep);margin-bottom:6px}
+.foot .meta{font:500 11px/1 var(--f-display);letter-spacing:.22em;text-transform:uppercase;margin-top:6px}
+
+@media (max-width:360px){
+  .sides{gap:6px}
+  .sides .mini{--s:34px}
+  .brand .logo{font-size:24px}
+}
+@media (max-width:350px){
+  .sleeve{grid-template-columns:52px minmax(0,1fr)}
+  .vtitle{font-size:36px}
+  .tracks{padding-inline:8px 12px}
+  .t-name{font-size:22px}
+  .band-title{padding-left:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .record,.record .spin{transition:none!important;animation:none!important}
+  .record.tucked{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#a" aria-label="a Morriña, volver a la portada">
+      <span class="logo">a Morriña</span>
+      <small>Coffee &amp; Jazz</small>
+    </a>
+    <nav class="sides" id="nav" aria-label="Caras de la carta"></nav>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <span class="logo">a Morriña</span>
+    <span>Coffee &amp; Jazz Company</span>
+    <span>Verín (Ourense)</span>
+    <span class="meta">Record No. 2024 · 45 RPM</span>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CONTENIDO DE LA CARTA
+   Cada "cara" es una sección del disco y tiene uno o varios grupos.
+   - prefijo: palabra pequeña delante de cada nombre (p. ej. "Tostada")
+   - tamanos: dos etiquetas si los platos tienen dos precios (p. ej. ['Pequeña','Grande'])
+     y entonces precio:[pequeña, grande]; con un solo precio, precio: 7.00
+   - titulo + tono ('azul' o 'morado'): el grupo sale como banda a todo el ancho
+   - marcas: 'horno' (al horno) o 'veg' (vegetariano)
+   ========================================================= */
+const CARAS = [
+  { id:'b', cara:'B', titulo:'Tostadas', grupos:[
+    { prefijo:'Tostada', platos:[
+      { nombre:'A Morriña', desc:'Tomate, sal y aceite de oliva.', precio:2.50 },
+      { nombre:'Blues', desc:'Tomate, jamón ibérico y aceite de oliva.', precio:5.80 },
+      { nombre:'Rock', desc:'Tomate, jamón y aceite de oliva.', precio:4.50 },
+      { nombre:'Soul', desc:'Miel casera, sobrasada y queso rallado, todo horneado.', precio:6.20, marcas:['horno'] },
+      { nombre:'Jazz', desc:'Aguacate, tomate, anchoas, queso fresco y aceite de oliva.', precio:7.00 },
+      { nombre:'Boogie', desc:'Queso brie, jamón serrano, aceite de oliva, vinagre balsámico y frutos del bosque.', precio:6.50, marcas:['horno'] },
+    ]},
+  ]},
+  { id:'c', cara:'C', titulo:'Tostadas', grupos:[
+    { prefijo:'Tostada', platos:[
+      { nombre:'Country', desc:'Tomate, ventresca, pimiento rojo y cebolla.', precio:7.70 },
+      { nombre:'Pop', desc:'Queso brie, mermelada de tomate y cebolla caramelizada.', precio:7.00, marcas:['horno'] },
+      { nombre:'Funk', desc:'Tomate, cebolla cruda, sardinas y aceite de oliva.', precio:7.70 },
+      { nombre:'Reggae', desc:'Champiñones, queso fresco y bacon, gratinado.', precio:7.70, marcas:['horno'] },
+      { nombre:'Swing', desc:'Hummus, rodaja de tomate, aguacate, sésamo, aceite de oliva y pesto (opcional).', precio:7.00, marcas:['veg'] },
+      { nombre:'Folk', desc:'Tomate, Arzúa con anchoas y aceite de oliva.', precio:7.00 },
+    ]},
+  ]},
+  { id:'d', cara:'D', titulo:'Raciones', extra:'Vinos y postre', grupos:[
+    { tamanos:['Pequeña','Grande'], platos:[
+      { nombre:'Tomate', precio:[6.50, 7.00] },
+      { nombre:'Tomate con ventresca', precio:[7.00, 12.00] },
+      { nombre:'Quesos variados', precio:[7.00, 10.00] },
+      { nombre:'Jamón ibérico', precio:[7.00, 12.00] },
+      { nombre:'Jamón ibérico y queso', precio:[9.00, 15.00] },
+      { nombre:'Queso Arzúa con anchoas', precio:[7.00, 12.00] },
+      { nombre:'Anchoas, aceitunas y aceite de oliva', precio:[6.50, 10.00] },
+      { nombre:'Pimientos de Padrón', precio:7.00 },
+      { nombre:'Croquetas', precio:7.50 },
+      { nombre:'Champiñones con jamón ibérico', precio:6.75 },
+      { nombre:'Quesos variados del país con anchoas', precio:12.00 },
+    ]},
+    { titulo:'Vinos', tono:'azul', tamanos:['Copa','Botella'], platos:[
+      { nombre:'Vino de la casa', precio:[1.30, 7.50] },
+      { nombre:'D.O. Monterrei', precio:[2.30, 14.00] },
+      { nombre:'Ribera del Duero', precio:[2.80, 18.00] },
+    ]},
+    { titulo:'Postre', tono:'morado', platos:[
+      { nombre:'Coulant', desc:'Chocolate negro.', precio:3.50 },
+    ]},
+  ]},
+];
+
+/* ========================================================= */
+
+const MARCAS = {
+  horno:{ label:'Al horno', svg:'<svg class="mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="var(--ink)"/><path fill="var(--label)" d="M8 3.1c.6 1.9 3.2 3.2 3.2 6.1 0 2-1.4 3.4-3.2 3.4S4.8 11.2 4.8 9.4c0-1.4.8-2.4 1.6-3 0 1.2.6 1.9 1.3 2.1C7.3 6.8 7.6 4.8 8 3.1z"/></svg>' },
+  veg:{ label:'Vegetariano', svg:'<svg class="mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="var(--ink)"/><path fill="var(--label)" d="M4.4 11.6c0-4.4 2.8-7.1 7.2-7.1 0 4.4-2.8 7.1-7.2 7.1z"/><path d="M5 11l5.2-5.2" stroke="var(--ink)" stroke-width=".9" stroke-linecap="round"/></svg>' },
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const euros = p => Number(p).toFixed(2).replace('.', ',') + ' €';
+const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const totalPlatos = c => c.grupos.reduce((n, g) => n + g.platos.length, 0);
+const temas = n => n + (n === 1 ? ' tema' : ' temas');
+
+/* Disco en SVG: los surcos tienen tantas pistas como platos tiene la cara */
+function disco(o){
+  const id = o.uid;
+  let surcos = '';
+  for (let r = 119; r <= 193; r += 2.3) surcos += `<circle r="${r.toFixed(1)}" class="gv"/>`;
+  const n = Math.max(1, o.pistas);
+  for (let i = 1; i < n; i++) {
+    const r = 122 + (190 - 122) * i / n;
+    surcos += `<circle r="${r.toFixed(1)}" class="gap"/><circle r="${(r + 1.3).toFixed(1)}" class="gap-hi"/>`;
+  }
+  const centro = o.portada ? `
+      <text class="lb-title" x="4.5" y="52" text-anchor="middle">CARTA</text>
+      <text class="lb-small" y="63" text-anchor="middle">DISFRUTA DE NUESTRAS</text>
+      <text class="lb-small" y="71" text-anchor="middle">ESPECIALIDADES</text>
+      <text class="lb-tiny" x="0.7" y="80" text-anchor="middle">RECORD NO. 2024</text>` : `
+      <text class="lb-title s" x="2.5" y="54" text-anchor="middle">${esc(o.titulo.toUpperCase())}</text>
+      <text class="lb-small" y="67" text-anchor="middle">${esc(o.sub.toUpperCase())} · CARA ${esc(o.cara)}</text>`;
+  return `<svg viewBox="-200 -200 400 400" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="lc-${id}"><circle r="112"/></clipPath>
+      <path id="arc-${id}" d="M -101 0 A 101 101 0 0 0 101 0" fill="none"/>
+    </defs>
+    <circle r="199" class="vin"/><circle r="197.5" class="rim"/>
+    ${surcos}
+    <g clip-path="url(#lc-${id})">
+      <rect x="-112" y="-112" width="224" height="136" class="lb-o"/>
+      <rect x="-112" y="24" width="224" height="88" class="lb-c"/>
+      <line x1="-112" x2="112" y1="-12" y2="-12" class="lb-line"/>
+    </g>
+    <text class="lb-logo-sh" x="0" y="-34" text-anchor="middle" transform="translate(2.4 2.8) rotate(-5)">a Morriña</text>
+    <text class="lb-logo" x="0" y="-34" text-anchor="middle" transform="rotate(-5)">a Morriña</text>
+    <text class="lb-big" x="-60" y="11" text-anchor="middle">${esc(o.cara)}</text>
+    <text class="lb-tiny" x="-59.3" y="19.5" text-anchor="middle">SIDE</text>
+    <text class="lb-big" x="60" y="11" text-anchor="middle">45</text>
+    <text class="lb-tiny" x="60.7" y="19.5" text-anchor="middle">RPM RECORD</text>
+    ${centro}
+    <text class="lb-arc"><textPath href="#arc-${id}" startOffset="50%" text-anchor="middle">COFFEE &amp; JAZZ COMPANY</textPath></text>
+    <circle r="112" class="lb-edge"/>
+    <circle cy="3" r="5" class="hole"/>
+  </svg>`;
+}
+
+const chevron = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function portada(){
+  const filas = CARAS.map(c => `
+    <li><a href="#${c.id}">
+      <span class="mini" aria-hidden="true">${esc(c.cara)}</span>
+      <span><span class="eyb">Cara ${esc(c.cara)}</span><span class="ttl">${esc(c.titulo)}</span>${c.extra ? `<span class="xtra">${esc(c.extra)}</span>` : ''}</span>
+      <span class="cnt">${temas(totalPlatos(c))}${chevron}</span>
+    </a></li>`).join('');
+  return `
+  <section id="a" class="cover" aria-label="Portada">
+    <button class="record" type="button" data-rec aria-label="Girar el disco de la portada">
+      <span class="spin">${disco({uid:'a', cara:'A', portada:true, pistas:CARAS.length})}</span>
+    </button>
+    <p class="hint">Toca el disco para ponerlo a girar</p>
+    <nav class="index" aria-labelledby="ix-h">
+      <h2 id="ix-h">Tracklist</h2>
+      <p class="lead">Disfruta de nuestras especialidades. Cada cara del disco es una sección de la carta.</p>
+      <ol>${filas}</ol>
+    </nav>
+  </section>`;
+}
+
+function precioHTML(p, g){
+  if (Array.isArray(p)) {
+    const [a, b] = g.tamanos || ['', ''];
+    return `<span class="price pair"><span><small>${esc(a)}</small>${euros(p[0])}</span><i aria-hidden="true"></i><span><small>${esc(b)}</small>${euros(p[1])}</span></span>`;
+  }
+  return `<span class="price">${euros(p)}</span>`;
+}
+
+function cara(c, i){
+  const usadas = new Set();
+  let num = 0;
+  const lista = (g, tag) => g.platos.map(p => {
+    num++;
+    const marcas = (p.marcas || []).filter(m => MARCAS[m]);
+    marcas.forEach(m => usadas.add(m));
+    const iconos = marcas.map(m => MARCAS[m].svg.replace('aria-hidden="true"', `role="img" aria-label="${MARCAS[m].label}"`)).join('');
+    return `
+      <li class="track">
+        <span class="no">${esc(c.cara)}${num}</span>
+        <div>
+          <div class="t-head">
+            <${tag} class="t-name">${g.prefijo ? `<span class="pre">${esc(g.prefijo)}</span>` : ''}${esc(p.nombre)}${iconos}</${tag}>
+            ${precioHTML(p.precio, g)}
+          </div>
+          ${p.desc ? `<p class="desc">${esc(p.desc)}</p>` : ''}
+        </div>
+      </li>`;
+  }).join('');
+
+  const [primero, ...resto] = c.grupos;
+  const compacto = g => (g.tamanos || g.titulo) && !g.platos.some(p => p.desc) ? ' compact' : '';
+  const cuerpo = `<ol class="tracks${compacto(primero)}">${lista(primero, 'h3')}</ol>`;
+  const bandas = resto.map(g => `
+      <div class="band ${g.tono || 'azul'}">
+        <h3 class="band-title">${esc(g.titulo || '')}</h3>
+        <ol class="tracks${compacto(g)}">${lista(g, 'h4')}</ol>
+      </div>`).join('');
+  const leyenda = [...usadas].map(m => `<span>${MARCAS[m].svg}${MARCAS[m].label}</span>`).join('');
+  const total = totalPlatos(c);
+  const sig = CARAS[i + 1];
+  const vuelta = sig
+    ? `<a class="flip" href="#${sig.id}"><span class="mini" aria-hidden="true">${esc(sig.cara)}</span>Dale la vuelta · Cara ${esc(sig.cara)}</a>`
+    : `<a class="flip" href="#a"><span class="mini" aria-hidden="true">A</span>Volver a la cara A</a>`;
+  return `
+  <section id="${c.id}" class="side" aria-labelledby="t-${c.id}">
+    <button class="record" type="button" data-rec aria-label="Girar el disco de la cara ${esc(c.cara)}">
+      <span class="spin">${disco({uid:c.id, cara:c.cara, titulo:c.titulo, sub:c.extra || temas(total), pistas:total})}</span>
+    </button>
+    <article class="sleeve">
+      <div class="strip">
+        <div class="side-tag"><b>${esc(c.cara)}</b><span>Side</span></div>
+        <hr>
+        <h2 class="vtitle" id="t-${c.id}">${esc(c.titulo)}</h2>
+        <div class="rpm">45<small>RPM</small></div>
+      </div>
+      <div class="body">
+        ${cuerpo}
+        ${leyenda ? `<div class="legend">${leyenda}</div>` : ''}
+      </div>
+      ${bandas}
+    </article>
+    ${vuelta}
+  </section>`;
+}
+
+const main = document.getElementById('main');
+const nav = document.getElementById('nav');
+main.innerHTML = portada() + CARAS.map(cara).join('');
+nav.innerHTML = [{id:'a', cara:'A', titulo:'Portada'}, ...CARAS]
+  .map(c => `<a class="mini" href="#${c.id}" aria-label="Cara ${esc(c.cara)} · ${esc(c.titulo)}" aria-current="${c.id === 'a'}">${esc(c.cara)}</a>`).join('');
+
+/* Navegación entre caras */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const el = document.getElementById(a.getAttribute('href').slice(1));
+  if (!el) return;
+  e.preventDefault();
+  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  try { history.replaceState(null, '', '#' + el.id); } catch (_) {}
+});
+
+/* Girar el disco al tocarlo */
+function girar(rec){
+  if (reduce || !rec) return;
+  const s = rec.querySelector('.spin');
+  s.classList.remove('go'); void s.offsetWidth; s.classList.add('go');
+}
+document.querySelectorAll('[data-rec]').forEach(r => r.addEventListener('click', () => girar(r)));
+
+/* Abrir directamente en una cara (#b, #c, #d) */
+const inicial = (location.hash || '').slice(1);
+const destino = inicial && document.getElementById(inicial);
+if (destino) destino.scrollIntoView({ block: 'start' });
+
+/* La portada gira al cargar; cada disco sale de su funda al llegar a él */
+girar(document.querySelector('.cover .record'));
+if ('IntersectionObserver' in window) {
+  if (!reduce) {
+    const recs = [...document.querySelectorAll('.side .record')];
+    const vh = window.innerHeight || 700;
+    recs.forEach(r => { if (r.getBoundingClientRect().top > vh * 0.85) r.classList.add('tucked'); });
+    const io = new IntersectionObserver(es => es.forEach(en => {
+      if (!en.isIntersecting) return;
+      const r = en.target;
+      if (r.classList.contains('tucked')) { r.classList.remove('tucked'); girar(r); }
+      io.unobserve(r);
+    }), { rootMargin: '0px 0px -15% 0px' });
+    recs.forEach(r => io.observe(r));
+  }
+  /* Marca en la cabecera la cara que se está viendo */
+  const links = [...nav.querySelectorAll('a')];
+  const io2 = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return;
+    links.forEach(l => l.setAttribute('aria-current', String(l.getAttribute('href') === '#' + en.target.id)));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section').forEach(s => io2.observe(s));
+}
+</script>
+
+</body>
+</html>
